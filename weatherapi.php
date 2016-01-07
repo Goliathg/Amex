@@ -20,8 +20,7 @@ $forecastday = $parsed_futurejson->{'forecast'}->{'txt_forecast'}->{'forecastday
 $count = count($forecastday);
 for($i = 0; $i < $count; $i++)
   {
-	  
-     $period = $forecastday[$i];
+    $period = $forecastday[$i];
 	 if($period->{'period'} == 0 || $period->{'period'} == 2 || $period->{'period'} == 4)
      {
 	 $forecast = $parsed_futurejson->{'forecast'}->{'txt_forecast'}->{'forecastday'}[$i]->{'fcttext'};
@@ -31,10 +30,10 @@ for($i = 0; $i < $count; $i++)
 	 echo $forecast;
 	 echo "<br>";
 
-	 }
+  }
 		
 	  
-  }
+ }
   
 ?>
 </head>
