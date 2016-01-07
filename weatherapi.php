@@ -6,13 +6,36 @@
 <?php
 $key = 'f7dc5c04a4737807';
 $zip = $_POST['zipcode'];
-$zipurl = file_get_contents("http://api.wunderground.com/api/$key/geolookup/q/$zip.json");
 $currenturl = file_get_contents("http://api.wunderground.com/api/$key/geolookup/conditions/q/$zip.json");
-$futureurl = 'http://api.wunderground.com/api/$key/forecast/q/$zip.json';
+$futureurl = file_get_contents("http://api.wunderground.com/api/$key/forecast/q/$zip.json");
 $parsed_json = (json_decode($currenturl));
 $location = $parsed_json->{'current_observation'}->{'display_location'}->{'full'};
 $temp = $parsed_json->{'current_observation'}->{'temp_f'};
-echo "The current temperature in $location is $temp";
+echo "The current temperature in $location is: $temp";
+echo "<br>";
+echo "The three day forecast for $location is: \n";
+echo "<br>";
+$parsed_futurejson = (json_decode($futureurl));
+$forecastday = $parsed_futurejson->{'forecast'}->{'txt_forecast'}->{'forecastday'};
+$count = count($forecastday);
+for($i = 0; $i < $count; $i++)
+  {
+	  
+     $period = $forecastday[$i];
+	 if($period->{'period'} == 0 || $period->{'period'} == 2 || $period->{'period'} == 4)
+     {
+	 $forecast = $parsed_futurejson->{'forecast'}->{'txt_forecast'}->{'forecastday'}[$i]->{'fcttext'};
+	 $dayofweek = $period->{'title'};
+	 echo $dayofweek;
+	 echo ": " ;
+	 echo $forecast;
+	 echo "<br>";
+
+	 }
+		
+	  
+  }
+  
 ?>
 </head>
 
