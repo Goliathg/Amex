@@ -4,6 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Weather</title>
 <?php
+$zip = $_POST['zipcode'];
+?>
+<form id= "weatherform" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>"> Zip Code: <input type = "text" name = "zipcode" value="<?php echo $zip;?>" pattern="^\d{5}(-\d{4})?$"> <br /> <input type="submit" value="Submit" id="submit"> </form>﻿
+<div id='weatherreport'></div>
+
+
+</script>
+
+</head>
+
+<body>
+<?php
 $key = 'f7dc5c04a4737807';
 $zip = $_POST['zipcode'];
 $currenturl = file_get_contents("http://api.wunderground.com/api/$key/geolookup/conditions/q/$zip.json");
@@ -38,13 +50,5 @@ for($i = 0; $i < $count; $i++)
  }
   
 ?>
-
-</script>
-
-</head>
-
-<body>
-<form id= "weatherform" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>"> Zip Code: <input type = "text" name = "zipcode" value="<?php echo $zip;?>" pattern="^\d{5}(-\d{4})?$"> <br /> <input type="submit" value="Submit" id="submit"> </form>﻿
-<div id='weatherreport'></div>
 </body>
 </html>
