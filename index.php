@@ -23,8 +23,9 @@ $futureurl = file_get_contents("http://api.wunderground.com/api/$key/forecast/q/
 $parsed_json = (json_decode($currenturl));
 $location = $parsed_json->{'current_observation'}->{'display_location'}->{'full'};
 $temp = $parsed_json->{'current_observation'}->{'temp_f'};
+$weather = $parsed_json->{'current_observation'}->{'weather'};
 if(isset($zip) != null){
-echo "The current temperature in $location is: $temp";
+echo "The current weather conditions in $location is: $weather with a temperature of $temp degrees";
 echo "<br>";
 echo "The three day forecast for $location is: \n";
 echo "<br>";
